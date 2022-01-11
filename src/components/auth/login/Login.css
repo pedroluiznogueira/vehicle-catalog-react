@@ -54,10 +54,10 @@
 
 .form-group-question {
     font-size: 15px;
-    cursor: pointer;
 }
 
 .question-text {
+    cursor: pointer;
     color:rgb(98, 98, 98);
     text-decoration: none;
     color: rgb(88, 166, 255);

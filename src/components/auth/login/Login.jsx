@@ -1,7 +1,8 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useContext, useState } from 'react';
-import './Login.css';
 import UserContext from "../../context/user/UserContext";
+import spinner from '../../shared/assets/spinner.gif';
+import './Login.css';
 
 const user = {
     email: '',
@@ -89,7 +90,14 @@ function Login() {
                         </NavLink>
                     </small>
                 </div>
-                <button className="btn" type="submit">Entrar</button>
+                {
+                    isLoading ?
+                    <img 
+                        src={spinner}
+                        style={{width: '50px'}}
+                    /> : 
+                    <button className="btn" type="submit">Entrar</button>
+                }
             </form>
         </div>
     );

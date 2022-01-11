@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react';
 import { NavLink, useNavigate } from "react-router-dom";
 import UserContext from '../../context/user/UserContext';
+import spinner from '../../shared/assets/spinner.gif';
 import './Register.css';
 
 const user = {
@@ -107,7 +108,14 @@ function Register() {
                         </NavLink>
                     </small>
                 </div>
-                <button className="btn" type="submit">Criar conta</button>
+                {
+                    isLoading ?
+                    <img
+                        src={spinner}
+                        style={{width: '50px'}}
+                    /> : 
+                    <button className="btn" type="submit">Criar conta</button>
+                }
             </form>
         </div>
     );

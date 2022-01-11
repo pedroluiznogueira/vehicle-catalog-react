@@ -1,14 +1,20 @@
 import './Vehicle.css';
 import webmotors from '../../shared/assets/webmotors.jpg';
 import VehicleContext from '../../context/vehicle/VehicleContext';
-import { useContext } from 'react';
+import { useContext, useState, useEffect } from 'react';
 
 function Vehicle() {
+    const [catalog, setCatalog] = useState([]);    
     const {vehicles} = useContext(VehicleContext);
+
+    useEffect(() => {
+        setCatalog(vehicles);
+        console.log(catalog);
+    });
     
     return (
         <div className="catalog">
-            {vehicles.map((vehicle) => (
+            {catalog.map((vehicle) => (
                 <div className="card">
                     <div className="img">
                         <img src={webmotors} alt="" />

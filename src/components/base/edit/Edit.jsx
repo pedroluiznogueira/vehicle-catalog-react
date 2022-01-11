@@ -25,14 +25,10 @@ function Edit() {
             selectedFile.name
         );
 
-        console.log(selectedFile);
-
         vehicle.name = nameText;
         vehicle.brand = brandText;
         vehicle.model = modelText;
         vehicle.imagePath = selectedFile.name;
-
-        console.log(vehicle);
     }
 
     const onFileChange = (e) => {

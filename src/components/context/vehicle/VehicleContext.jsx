@@ -11,6 +11,7 @@ export const VehicleProvider = ( {children} ) => {
 
     const fetchVehicles = async () => {
         let token = window.sessionStorage.getItem('token');
+
         const response = await fetch('http://localhost:8080/vehicles/find/all', {
             headers: {
                 'Accept': 'application/json',
@@ -24,13 +25,34 @@ export const VehicleProvider = ( {children} ) => {
         return data;
     }
 
+    const uploadFile = async (formData) => {
+        console.log(formData);
+    }
+
     const registerVehicle = async (vehicle) => {
         console.log(vehicle);
+        let token = window.sessionStorage.getItem('token');
+        const userId = window.sessionStorage.getItem('logged');
+
+        const response = await fetch(`http://localhost:8080/vehicles/register/${userId}`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            },
+            body: JSON.stringify(vehicle)
+        });
+        const data = await response.json();
+        console.log(data);
+        return data;
     }
 
     return(
         <VehicleContext.Provider value={{
-            vehicles: vehicles
+            vehicles: vehicles,
+            uploadFile: uploadFile,
+            registerVehicle: registerVehicle
         }}>
             {children}
         </VehicleContext.Provider>

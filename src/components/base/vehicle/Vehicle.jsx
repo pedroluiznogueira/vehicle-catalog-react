@@ -52,7 +52,7 @@ function Vehicle() {
                                 <div className="model" style={{color: 'white'}}>{vehicle.model}</div>
                                 <div className="brand" style={{color: 'white'}}>{vehicle.brand}</div>
                             </div>
-                            {isAdmin === 'false' && (
+                            {isAdmin === 'true' && (
                                 <div className="icon-block">
                                     <FaPlus className="icon" onClick={handlePlus} />
                                     <FaTrash className="icon" onClick={handleTrash} />

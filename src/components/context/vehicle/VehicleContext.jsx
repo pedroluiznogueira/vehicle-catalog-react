@@ -3,6 +3,8 @@ import { createContext, useState, useEffect } from 'react';
 const VehicleContext = createContext();
 
 export const VehicleProvider = ( {children} ) => {
+    const [vehicles, setVehicles] = useState([]);
+
     useEffect(() => {
         fetchVehicles();
     }, []);
@@ -18,11 +20,14 @@ export const VehicleProvider = ( {children} ) => {
         });
         const data = await response.json();
         console.log(data);
+        setVehicles(data);
         return data;
     }
 
     return(
-        <VehicleContext.Provider value={{}}>
+        <VehicleContext.Provider value={{
+            vehicles: vehicles
+        }}>
             {children}
         </VehicleContext.Provider>
     );

@@ -9,8 +9,9 @@
 
 .register-form {
     width: 350px;
-    height: 630px;
+    height: 550px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    background-color: #161B22;
 
     display: flex;
     justify-content: center;
@@ -51,7 +52,7 @@
 }
 
 .question-text:hover {
-    color:black;
+    color: rgb(49, 98, 155);
     border-bottom: 1px solid black;
 }
 
@@ -59,18 +60,21 @@
 
 
 .btn {
-    border: 1px solid rgb(98, 98, 98);
-    background-color: rgb(98, 98, 98);
-    color: white;
+    border: 1px solid #010409;
+    background-color: #010409;
+    color: rgb(88, 166, 255);
+    cursor: pointer;
+    font-size: 20px;
+    width: 160px;
 }
 
 .btn:hover {
     background-color: black;
-    color: white;
+    color: rgb(49, 98, 155);
 }
 
 .btn:active {
-    background-color: rgb(98, 98, 98);
+    color: rgb(88, 166, 255);
 }
 
 .btn:focus {

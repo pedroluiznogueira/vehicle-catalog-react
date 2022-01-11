@@ -3,10 +3,12 @@ import webmotors from '../../shared/assets/webmotors.jpg';
 import VehicleContext from '../../context/vehicle/VehicleContext';
 import { useContext, useState, useEffect } from 'react';
 import { FaTrash, FaPlus, FaEdit } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 function Vehicle() {
     const [catalog, setCatalog] = useState([]);
     const [isAdmin, setIsAdmin] = useState('');
+    const navigate = useNavigate();
     const {vehicles, fetchVehicles} = useContext(VehicleContext);
 
     
@@ -15,7 +17,21 @@ function Vehicle() {
         setIsAdmin(admin);
         setCatalog(vehicles);
     }, fetchVehicles);
-    
+
+    const handlePlus = () => {
+        console.log('plus');
+        navigate('/plus');
+    }
+
+    const handleTrash = () => {
+        console.log('trash');
+        navigate('/trash');
+    }
+
+    const handleEdit = () => {
+        console.log('edit');
+        navigate('/plus');
+    }
 
     return (
         <div className="catalog">
@@ -36,9 +52,9 @@ function Vehicle() {
                             </div>
                             {isAdmin === 'false' && (
                                 <div className="icon-block">
-                                    <FaPlus className="icon" />
-                                    <FaTrash className="icon" />
-                                    <FaEdit className="icon" />
+                                    <FaPlus className="icon" onClick={handlePlus} />
+                                    <FaTrash className="icon" onClick={handleTrash} />
+                                    <FaEdit className="icon" onClick={handleEdit} />
                                 </div>
                             )}
                         </div>

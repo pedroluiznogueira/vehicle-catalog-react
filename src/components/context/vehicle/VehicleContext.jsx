@@ -5,6 +5,7 @@ const VehicleContext = createContext();
 
 export const VehicleProvider = ( {children} ) => {
     const [vehicles, setVehicles] = useState([]);
+    const [vehicleId, setVehicleId] = useState(null);
 
     useEffect(() => {
         fetchVehicles();
@@ -45,7 +46,31 @@ export const VehicleProvider = ( {children} ) => {
             body: JSON.stringify(vehicle)
         });
         const data = await response.json();
-        console.log(data);
+        setVehicles([data, ...vehicles]);
+        return data;
+    }
+
+    const vehicleIdEmitter = (id) => {
+        setVehicleId(id);
+    }
+
+    const updateVehicle = async (vehicle) => {
+        let token = window.sessionStorage.getItem('token');
+        const userId = window.sessionStorage.getItem('logged');
+
+        const response = await fetch(`http://localhost:8080/vehicles/update/${vehicleId}/user/${userId}`, {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            },
+            body: JSON.stringify(vehicle)
+        });
+        const data = await response.json();
+        setVehicles(
+            vehicles.map((vehicle) => (vehicle.id === vehicleId ? {...vehicle, ...data}: vehicle))
+        ); 
         return data;
     }
 
@@ -53,7 +78,9 @@ export const VehicleProvider = ( {children} ) => {
         <VehicleContext.Provider value={{
             vehicles: vehicles,
             uploadFile: uploadFile,
-            registerVehicle: registerVehicle
+            registerVehicle: registerVehicle,
+            vehicleIdEmitter: vehicleIdEmitter,
+            updateVehicle: updateVehicle
         }}>
             {children}
         </VehicleContext.Provider>

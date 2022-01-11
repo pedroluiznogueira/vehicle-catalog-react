@@ -1,6 +1,7 @@
 import AdminNavbar from './../../shared/adminavbar/AdminNavbar';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import './Edit.css';
+import VehicleContext from '../../context/vehicle/VehicleContext';
 
 const vehicle = {
     name: '',
@@ -14,6 +15,7 @@ function Edit() {
     const [brandText, setBrandText] = useState('');
     const [modelText, setModelText] = useState('');
     const [selectedFile, setSelectedFile] = useState(null);
+    const {uploadFile, updateVehicle} = useContext(VehicleContext);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -25,10 +27,14 @@ function Edit() {
             selectedFile.name
         );
 
+        uploadFile(formData);
+
         vehicle.name = nameText;
         vehicle.brand = brandText;
         vehicle.model = modelText;
         vehicle.imagePath = selectedFile.name;
+
+        updateVehicle(vehicle);
     }
 
     const onFileChange = (e) => {

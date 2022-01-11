@@ -6,10 +6,10 @@ import { FaTrash, FaPlus, FaEdit } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
 function Vehicle() {
+    const navigate = useNavigate();
     const [catalog, setCatalog] = useState([]);
     const [isAdmin, setIsAdmin] = useState('');
-    const navigate = useNavigate();
-    const {vehicles, fetchVehicles} = useContext(VehicleContext);
+    const {vehicles, fetchVehicles, vehicleIdEmitter} = useContext(VehicleContext);
 
     const bucketUrl = "https://udeyou.s3.sa-east-1.amazonaws.com/"
     
@@ -20,19 +20,17 @@ function Vehicle() {
     }, fetchVehicles);
 
     const handlePlus = () => {
-        console.log('plus');
         navigate('/plus');
     }
 
     const handleTrash = () => {
         if (window.confirm('Are you sure you want to delete it ?')) {
-            console.log('trash');
             navigate('/trash');
         }
     }
 
-    const handleEdit = () => {
-        console.log('edit');
+    const handleEdit = (id) => {
+        vehicleIdEmitter(id);
         navigate('/edit');
     }
 
@@ -46,7 +44,7 @@ function Vehicle() {
                     <div className="vehicle-info">
                         <div className="upper-block">
                             <h2 className="name" style={{color: 'white'}}>{vehicle.name}</h2>
-                            <h2 className="price">$2K</h2>
+                            <h2 className="price" style={{color: 'green'}}>$2K</h2>
                         </div>
                         <div className="bottom-block">
                             <div className="text-block">
@@ -57,7 +55,7 @@ function Vehicle() {
                                 <div className="icon-block">
                                     <FaPlus className="icon" onClick={handlePlus} />
                                     <FaTrash className="icon" onClick={handleTrash} />
-                                    <FaEdit className="icon" onClick={handleEdit} />
+                                    <FaEdit className="icon" onClick={() => {handleEdit(vehicle.id)}} />
                                 </div>
                             )}
                         </div>

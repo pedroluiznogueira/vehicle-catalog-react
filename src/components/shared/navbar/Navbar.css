@@ -1,0 +1,50 @@
+div {
+    width: 150px;
+}
+
+.navbar {
+    width: 100vw;
+    height: 100px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 4px 12px 0px;
+    background-color: #161B22;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 250px;
+}
+
+/* logo */
+
+.logo {
+    width: 200px;
+    cursor: pointer;
+    color: rgb(88, 166, 255);
+}
+
+.logo:hover {
+    color: rgb(49, 98, 155);
+}
+
+.logo:active {
+    cursor: pointer;
+    color: rgb(88, 166, 255);
+}
+
+/* logout button */
+
+.logout {
+    padding-right: 20px;
+    padding-left: 20px;
+    color: rgb(88, 166, 255);
+    border: none;
+    cursor: pointer;
+}
+
+.logout:hover {
+    color: rgb(49, 98, 155);
+}
+
+.logout:active {
+    color: rgb(88, 166, 255);
+}

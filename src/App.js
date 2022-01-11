@@ -1,8 +1,13 @@
 import './App.css';
+import Vehicle from './components/base/vehicle/Vehicle';
+import Navbar from './components/shared/navbar/Navbar';
 
 function App() {
   return (
-    <h1>Running...</h1>
+    <>
+      <Navbar />
+      <Vehicle />
+    </>
   );
 }
 

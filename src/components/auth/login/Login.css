@@ -1,0 +1,136 @@
+* {
+    color: rgb(88, 166, 255);
+    font-weight: bolder;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.form {
+    width: 350px;
+    height: 520px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    background-color: #161B22;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 25px;
+}
+
+/* divs surrouding inputs */
+
+.form-group {
+    font-size: 20px;
+    width: 220px;
+}
+
+/* inputs */
+
+.form-control {
+    text-align: center;
+    box-shadow: none;
+}
+
+.form-control:focus {
+    box-shadow: none;
+
+    text-align: center;
+}
+
+.form-control:visited {
+    box-shadow: none;
+    text-align: center;
+}
+
+/* create account link */
+
+.form-group-question {
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.question-text {
+    color:rgb(98, 98, 98);
+    text-decoration: none;
+    color: rgb(88, 166, 255);
+}
+
+.question-text:hover {
+    color: rgb(49, 98, 155);
+}
+
+/* button */
+
+.btn {
+    width: 100px;
+    height: 40px;
+    border: 1px solid #010409;
+    border-radius: 15px;
+    background-color: #010409;
+    color: rgb(88, 166, 255);
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.btn:hover {
+    background-color: black;
+    color: rgb(49, 98, 155);
+}
+
+.btn:active {
+    color: rgb(88, 166, 255);
+}
+
+.btn:focus {
+    box-shadow: none;
+}
+
+/* loader */
+
+.loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #5c5c5c;
+    width: 50px;
+    height: 50px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+}
+
+.loader-success {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #00ff40;
+    width: 50px;
+    height: 50px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+}
+
+.loader-error {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #ff0000;
+    width: 50px;
+    height: 50px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

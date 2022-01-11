@@ -24,6 +24,10 @@ export const VehicleProvider = ( {children} ) => {
         return data;
     }
 
+    const registerVehicle = async (vehicle) => {
+        console.log(vehicle);
+    }
+
     return(
         <VehicleContext.Provider value={{
             vehicles: vehicles

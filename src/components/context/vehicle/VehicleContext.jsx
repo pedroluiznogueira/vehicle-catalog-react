@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from 'react';
+import axios from "axios";
 
 const VehicleContext = createContext();
 
@@ -27,25 +28,28 @@ export const VehicleProvider = ( {children} ) => {
 
     const uploadFile = async (formData) => {
         console.log(formData);
+        const response = await axios.post("http://localhost:8080/upload-file", formData);
+        const data = response.json();
+        console.log(data);
     }
 
     const registerVehicle = async (vehicle) => {
         console.log(vehicle);
-        let token = window.sessionStorage.getItem('token');
-        const userId = window.sessionStorage.getItem('logged');
+        // let token = window.sessionStorage.getItem('token');
+        // const userId = window.sessionStorage.getItem('logged');
 
-        const response = await fetch(`http://localhost:8080/vehicles/register/${userId}`, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + token
-            },
-            body: JSON.stringify(vehicle)
-        });
-        const data = await response.json();
-        console.log(data);
-        return data;
+        // const response = await fetch(`http://localhost:8080/vehicles/register/${userId}`, {
+        //     method: 'POST',
+        //     headers: {
+        //         'Accept': 'application/json',
+        //         'Content-Type': 'application/json',
+        //         'Authorization': 'Bearer ' + token
+        //     },
+        //     body: JSON.stringify(vehicle)
+        // });
+        // const data = await response.json();
+        // console.log(data);
+        // return data;
     }
 
     return(

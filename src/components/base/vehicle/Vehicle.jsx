@@ -11,6 +11,7 @@ function Vehicle() {
     const navigate = useNavigate();
     const {vehicles, fetchVehicles} = useContext(VehicleContext);
 
+    const bucketUrl = "https://udeyou.s3.sa-east-1.amazonaws.com/"
     
     useEffect(() => {
         const admin = window.sessionStorage.getItem('isAdmin');
@@ -40,7 +41,7 @@ function Vehicle() {
             {catalog.map((vehicle) => (
                 <div className="card">
                     <div className="img">
-                        <img src={webmotors} alt="" />
+                        <img src={bucketUrl + vehicle.imagePath}  alt="" />
                     </div>
                     <div className="vehicle-info">
                         <div className="upper-block">

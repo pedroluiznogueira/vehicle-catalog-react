@@ -1,5 +1,5 @@
 export function isAuth() {
-    const mockedToken = window.sessionStorage.getItem('mockedToken');
-    if (mockedToken) return true;
+    const token = window.sessionStorage.getItem('token');
+    if (token) return true;
     return false;
 }

@@ -1,18 +1,63 @@
-import { NavLink } from "react-router-dom";
+import { useContext, useState } from 'react';
+import { NavLink, useNavigate } from "react-router-dom";
+import UserContext from '../../context/user/UserContext';
+import spinner from '../../shared/assets/spinner.gif';
 import './Register.css';
 
+const user = {
+    name: '',
+    email: '',
+    password: ''
+}
+
 function Register() {
+    const navigate = useNavigate();
+    const [nameText, setNameText] = useState('');
+    const [emailText, setEmailText] = useState('');
+    const [passwordText, setPasswordText] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    const { register } = useContext(UserContext);
+
+    // setTimeout used only to simulate server response
     const handleSubmit = (e) => {
+        e.preventDefault();
+        user.name = nameText;
+        user.email = emailText;
+        user.password = passwordText;
+
+        setIsLoading(true);
+        const promise = register(user);
+        promise
+            .then(
+                (data) => {
+                    setTimeout(() => {
+                        setIsLoading(false);
+                        navigate('/login', { replace: true });
+                    }, 2000)
+                }
+            )
+            .catch(
+                setTimeout(() => {
+                    setIsLoading(false);
+                }, 2000)
+            );
+        setNameText('');
+        setEmailText('');
+        setPasswordText('');
     }
 
     const handleNameChange = (e) => {
+        setNameText(e.target.value);
     }
 
     const handleEmailChange = (e) => {
+        setEmailText(e.target.value);
     }
 
     const handlePasswordChange = (e) => {
+        setPasswordText(e.target.value)
     }
+
 
     return(
         <div className="container">
@@ -28,7 +73,7 @@ function Register() {
                         aria-describedby="emailHelp" 
                         placeholder="Name" 
                         name="name"
-    
+                        value={nameText}
                     />
                 </div>
                 <div className="form-group">
@@ -41,7 +86,7 @@ function Register() {
                     aria-describedby="emailHelp" 
                     placeholder="Email" 
                     name="email"
-
+                    value={emailText}
                 />
                 </div>
                 <div className="form-group">
@@ -53,7 +98,7 @@ function Register() {
                     id="exampleInputPassword1" 
                     placeholder="Password" 
                     name="password"
-   
+                    value={passwordText}   
                 />
                 </div>
                 <div className="form-group-question">
@@ -63,7 +108,14 @@ function Register() {
                         </NavLink>
                     </small>
                 </div>
-                <button className="btn" type="submit">Criar conta</button>
+                {
+                    isLoading ?
+                    <img
+                        src={spinner}
+                        style={{width: '50px'}}
+                    /> : 
+                    <button className="btn" type="submit">Criar conta</button>
+                }
             </form>
         </div>
     );

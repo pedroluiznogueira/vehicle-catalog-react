@@ -1,19 +1,58 @@
 import { NavLink, useNavigate } from "react-router-dom";
+import { useContext, useState } from 'react';
+import UserContext from "../../context/user/UserContext";
+import spinner from '../../shared/assets/spinner.gif';
 import './Login.css';
+
+const user = {
+    email: '',
+    password: ''
+}
 
 function Login() {
     const navigate = useNavigate();
-    
+    const [emailText, setEmailText] = useState('');
+    const [passwordText, setPasswordText] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    const { authenticate } = useContext(UserContext);
+
+    // setTimeout used only to simulate server response
     const handleSubmit = (e) => {
-        window.sessionStorage.setItem('mockedToken', 'mockedToken');
-        navigate('/app');
+        e.preventDefault();
+        user.email = emailText;
+        user.password = passwordText;
+        
+        setIsLoading(true);
+        const promise = authenticate(user);
+        promise
+            .then(
+                (data) => {
+                    setTimeout(() => {
+                        setIsLoading(false);
+                        window.sessionStorage.setItem('token', data.token);
+                        // window.sessionStorage.setItem('logged', JSON.stringify(data.user));
+                        navigate('/app', { replace: true });
+                    }, 2000)
+                }
+            )
+            .catch(
+                setTimeout(() => {
+                    setIsLoading(false);
+                }, 2000)
+            );
+        
+        setEmailText('');
+        setPasswordText('');
     }
 
     const handleEmailChange = (e) => {
+        setEmailText(e.target.value);
     }
 
     const handlePasswordChange = (e) => {
+        setPasswordText(e.target.value)
     }
+
 
     return(
         <div className="container">
@@ -29,7 +68,7 @@ function Login() {
                         aria-describedby="emailHelp" 
                         placeholder="Enter email" 
                         name="email"
-
+                        value={emailText}
                     />
                 </div>
                 <div className="form-group">
@@ -40,8 +79,8 @@ function Login() {
                         className="form-control" 
                         id="exampleInputPassword1" 
                         placeholder="Password" 
-                        name="password" 
-                    
+                        name="password"
+                        value={passwordText}                    
                     />
                 </div>
                 <div className="form-group-question">
@@ -51,7 +90,14 @@ function Login() {
                         </NavLink>
                     </small>
                 </div>
-                <button className="btn" type="submit">Entrar</button>
+                {
+                    isLoading ?
+                    <img 
+                        src={spinner}
+                        style={{width: '50px'}}
+                    /> : 
+                    <button className="btn" type="submit">Entrar</button>
+                }
             </form>
         </div>
     );

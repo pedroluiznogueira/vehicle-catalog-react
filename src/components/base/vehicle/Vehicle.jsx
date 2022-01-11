@@ -5,12 +5,13 @@ import { useContext, useState, useEffect } from 'react';
 
 function Vehicle() {
     const [catalog, setCatalog] = useState([]);    
-    const {vehicles} = useContext(VehicleContext);
+    const {vehicles, fetchVehicles} = useContext(VehicleContext);
 
     useEffect(() => {
+        const isAdmin = window.sessionStorage.getItem('isAdmin');
+        
         setCatalog(vehicles);
-        console.log(catalog);
-    });
+    }, fetchVehicles);
     
     return (
         <div className="catalog">

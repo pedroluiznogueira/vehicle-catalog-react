@@ -1,8 +1,9 @@
 import './App.css';
+import Vehicle from './components/base/vehicle/Vehicle';
 
 function App() {
   return (
-    <h1>Running...</h1>
+    <Vehicle />
   );
 }
 

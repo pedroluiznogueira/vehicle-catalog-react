@@ -24,13 +24,15 @@ function Vehicle() {
     }
 
     const handleTrash = () => {
-        console.log('trash');
-        navigate('/trash');
+        if (window.confirm('Are you sure you want to delete it ?')) {
+            console.log('trash');
+            navigate('/trash');
+        }
     }
 
     const handleEdit = () => {
         console.log('edit');
-        navigate('/plus');
+        navigate('/edit');
     }
 
     return (

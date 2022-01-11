@@ -4,7 +4,9 @@ function Trash() {
     return (
         <>
             <AdminNavbar />
-            <h1>This is Trash</h1>
+            <div className="container">
+                <h1>Vehicle deleted</h1>
+            </div>
         </>
     )
 }

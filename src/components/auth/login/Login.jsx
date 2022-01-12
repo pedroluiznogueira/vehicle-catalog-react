@@ -35,11 +35,6 @@ function Login() {
                         navigate('/app', { replace: true });
                     }, 2000)
                 }
-            )
-            .catch(
-                setTimeout(() => {
-                    setIsLoading(false);
-                }, 2000)
             );
         
         setEmailText('');

@@ -34,11 +34,6 @@ function Register() {
                         navigate('/login', { replace: true });
                     }, 2000)
                 }
-            )
-            .catch(
-                setTimeout(() => {
-                    setIsLoading(false);
-                }, 2000)
             );
         setNameText('');
         setEmailText('');

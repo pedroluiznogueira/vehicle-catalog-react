@@ -28,7 +28,11 @@ export const VehicleProvider = ( {children} ) => {
     }
 
     const uploadFile = async (formData) => {
-        const response = await axios.post("http://localhost:8080/upload-file", formData);
+        let token = window.sessionStorage.getItem('token');
+        
+        const response = await axios.post("http://localhost:8080/upload-file", formData, {
+            headers: {'Authorization': 'Bearer ' + token}
+        });
         const data = response.json();
     }
 

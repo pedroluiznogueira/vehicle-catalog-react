@@ -2,8 +2,8 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useContext, useState } from 'react';
 import UserContext from "../../context/user/UserContext";
 import spinner from '../../shared/assets/spinner.gif';
-import './Login.css';
 import VehicleContext from "../../context/vehicle/VehicleContext";
+import './Login.css';
 
 const user = {
     email: '',

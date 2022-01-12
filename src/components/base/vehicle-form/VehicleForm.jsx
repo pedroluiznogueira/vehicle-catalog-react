@@ -1,7 +1,9 @@
 import AdminNavbar from './../../shared/adminavbar/AdminNavbar';
 import { useState, useContext } from 'react';
-import './VehicleForm.css';
 import VehicleContext from '../../context/vehicle/VehicleContext';
+import spinner from '../../shared/assets/spinner.gif';
+import './VehicleForm.css';
+import { useNavigate } from 'react-router-dom';
 
 const vehicle = {
     name: '',
@@ -12,17 +14,20 @@ const vehicle = {
 }
 
 function VehicleForm() {
+    const navigate = useNavigate();
     const [nameText, setNameText] = useState('');
     const [brandText, setBrandText] = useState('');
     const [modelText, setModelText] = useState('');
     const [priceNumber, setPriceNumber] = useState(null);
     const [selectedFile, setSelectedFile] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
     const {uploadFile, updateVehicle, registerVehicle, formGoal} = useContext(VehicleContext);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const formData = new FormData();
+        setIsLoading(true);
 
+        const formData = new FormData();
         formData.append(
             "file",
             selectedFile,
@@ -30,20 +35,38 @@ function VehicleForm() {
         );
 
         uploadFile(formData);
+        handleVehicle(formGoal);
+    }
 
+    const onFileChange = (e) => {
+        setSelectedFile(e.target.files[0])
+    }
+
+    const handleVehicle = (goal) => {
         vehicle.name = nameText;
         vehicle.brand = brandText;
         vehicle.model = modelText;
         vehicle.imagePath = selectedFile.name;
         vehicle.price = priceNumber;
 
-        if (formGoal === 'plus') registerVehicle(vehicle);
-        if (formGoal === 'edit') updateVehicle(vehicle);
+        if (formGoal === 'plus') {
+            const promise = registerVehicle(vehicle);
+            promise.then(() => {
+                setTimeout(() => {
+                    setIsLoading(false)
+                    navigate('/app');
+                }, 2000);
+            });
 
-    }
-
-    const onFileChange = (e) => {
-        setSelectedFile(e.target.files[0])
+        } else {
+            const promise = updateVehicle(vehicle);
+            promise.then(() => {
+                setTimeout(() => {
+                    setIsLoading(false);
+                    navigate('/app');
+                }, 2000);
+            });
+        }
     }
 
     const handleNameChange = (e) => {
@@ -108,8 +131,15 @@ function VehicleForm() {
                         <label id="image-label" htmlFor="image">Upload Image</label>
                         <input onChange={onFileChange} id="image" type="file" />    
                     </div>
-                    <div className="input-block">
-                        <button type="submit" className="btn">Submit</button>
+                    <div id="feedback" className="input-block">
+                    {
+                    isLoading ?
+                    <img
+                        src={spinner}
+                        style={{width: '50px'}}
+                    /> : 
+                    <button className="btn" type="submit">Send</button>
+                    }
                     </div>
                 </form>
             </div>

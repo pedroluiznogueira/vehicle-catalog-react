@@ -20,7 +20,7 @@ export const UserProvider = ( {children} ) => {
     }
 
     const authenticate = async (user) => {
-        const response = await fetch('${url}/users/auth', {
+        const response = await fetch(`${url}/users/auth`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

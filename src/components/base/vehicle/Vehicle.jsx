@@ -1,9 +1,8 @@
-import './Vehicle.css';
 import VehicleContext from '../../context/vehicle/VehicleContext';
 import { useContext, useState, useEffect } from 'react';
 import { FaTrash, FaPlus, FaEdit } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import spinner from '../../shared/assets/spinner.gif';
+import './Vehicle.css';
 
 function Vehicle() {
     const {vehicles, vehicleIdEmitter, deleteVehicle, formGoalEmitter} = useContext(VehicleContext);

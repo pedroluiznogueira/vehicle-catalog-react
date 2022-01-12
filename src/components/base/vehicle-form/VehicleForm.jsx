@@ -2,8 +2,8 @@ import AdminNavbar from './../../shared/adminavbar/AdminNavbar';
 import { useState, useContext } from 'react';
 import VehicleContext from '../../context/vehicle/VehicleContext';
 import spinner from '../../shared/assets/spinner.gif';
-import './VehicleForm.css';
 import { useNavigate } from 'react-router-dom';
+import './VehicleForm.css';
 
 const vehicle = {
     name: '',

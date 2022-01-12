@@ -9,7 +9,6 @@ import { isAuth } from './components/auth/token/Token';
 import { UserProvider } from './components/context/user/UserContext';
 import { VehicleProvider } from './components/context/vehicle/VehicleContext';
 import Plus from './components/base/plus/Plus';
-import Trash from './components/base/trash/Trash';
 import Edit from './components/base/edit/Edit';
 
 ReactDOM.render(
@@ -21,7 +20,6 @@ ReactDOM.render(
             <Route path="/" element={<PrivateOutlet />}>
               <Route path="/app" element={<App />} />
               <Route path="/plus" element={<Plus />} />
-              <Route path="/trash" element={<Trash />} />
               <Route path="/edit" element={<Edit />} />
             </Route>
             <Route path="/login" element={<Login />} />

@@ -1,5 +1,4 @@
 import './Vehicle.css';
-import webmotors from '../../shared/assets/webmotors.jpg';
 import VehicleContext from '../../context/vehicle/VehicleContext';
 import { useContext, useState, useEffect } from 'react';
 import { FaTrash, FaPlus, FaEdit } from 'react-icons/fa';

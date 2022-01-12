@@ -7,7 +7,8 @@ const vehicle = {
     name: '',
     brand: '',
     model: '',
-    imagePath: ''
+    imagePath: '',
+    price: null
 }
 
 function Plus() {

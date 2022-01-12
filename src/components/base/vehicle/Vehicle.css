@@ -51,6 +51,24 @@
 
 .bottom-block {
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.icon-block {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 5px;
+}
+
+.icon {
+    cursor: pointer;
+}
+
+.icon:hover {
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
 .model {

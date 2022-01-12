@@ -3,6 +3,7 @@ import { useContext, useState } from 'react';
 import UserContext from "../../context/user/UserContext";
 import spinner from '../../shared/assets/spinner.gif';
 import './Login.css';
+import VehicleContext from "../../context/vehicle/VehicleContext";
 
 const user = {
     email: '',
@@ -15,7 +16,8 @@ function Login() {
     const [passwordText, setPasswordText] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const { authenticate } = useContext(UserContext);
-
+    const { vehicles } = useContext(VehicleContext);
+    
     // setTimeout used only to simulate server response
     const handleSubmit = (e) => {
         e.preventDefault();

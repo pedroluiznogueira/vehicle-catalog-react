@@ -6,15 +6,16 @@ const VehicleContext = createContext();
 export const VehicleProvider = ( {children} ) => {
     const [vehicles, setVehicles] = useState([]);
     const [vehicleId, setVehicleId] = useState(null);
-    const [formGoal, setFormGoal] = useState(''); 
+    const [formGoal, setFormGoal] = useState('');
+
+    const token = window.sessionStorage.getItem('token');
+    const userId = window.sessionStorage.getItem('logged');    
 
     useEffect(() => {
         fetchVehicles();
     }, []);
 
     const fetchVehicles = async () => {
-        let token = window.sessionStorage.getItem('token');
-
         const response = await fetch('http://localhost:8080/vehicles/find/all', {
             method: 'GET',
             headers: { 
@@ -28,23 +29,16 @@ export const VehicleProvider = ( {children} ) => {
     }
 
     const uploadFile = async (formData) => {
-        let token = window.sessionStorage.getItem('token');
-        
         const response = await axios.post("http://localhost:8080/upload-file", formData, {
             headers: {'Authorization': 'Bearer ' + token}
         });
-        const data = response.json();
     }
 
     const formGoalEmitter = (goal) => {
-        console.log(goal);
         setFormGoal(goal);
     }
 
-    const registerVehicle = async (vehicle) => {
-        let token = window.sessionStorage.getItem('token');
-        const userId = window.sessionStorage.getItem('logged');
-
+    const registerVehicle = async (vehicle) => { 
         const response = await fetch(`http://localhost:8080/vehicles/register/${userId}`, {
             method: 'POST',
             headers: {
@@ -64,9 +58,6 @@ export const VehicleProvider = ( {children} ) => {
     }
 
     const updateVehicle = async (vehicle) => {
-        let token = window.sessionStorage.getItem('token');
-        const userId = window.sessionStorage.getItem('logged');
-
         const response = await fetch(`http://localhost:8080/vehicles/update/${vehicleId}/user/${userId}`, {
             method: 'PUT',
             headers: {
@@ -84,9 +75,6 @@ export const VehicleProvider = ( {children} ) => {
     }
 
     const deleteVehicle = async (vehicleId) => {
-        let token = window.sessionStorage.getItem('token');
-        const userId = window.sessionStorage.getItem('logged');
-
         const response = await fetch(`http://localhost:8080/vehicles/delete/${vehicleId}/user/${userId}`, {
             method: 'DELETE',
             headers: {

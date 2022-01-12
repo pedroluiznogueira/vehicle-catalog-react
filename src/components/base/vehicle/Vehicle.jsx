@@ -7,18 +7,9 @@ import spinner from '../../shared/assets/spinner.gif';
 
 function Vehicle() {
     const navigate = useNavigate();
-    const [isAdmin, setIsAdmin] = useState('');
-    const [catalog, setCatalog] = useState([]);
-    const {vehicles, fetchVehicles, vehicleIdEmitter, deleteVehicle} = useContext(VehicleContext);
-
-    const bucketUrl = "https://udeyou.s3.sa-east-1.amazonaws.com/"
-    
-    useEffect(() => {
-        const admin = window.sessionStorage.getItem('isAdmin');
-        setIsAdmin(admin);
-        setCatalog(vehicles);
-        console.log(vehicles);
-    }, fetchVehicles);
+    const { vehicles, vehicleIdEmitter, deleteVehicle } = useContext(VehicleContext);
+    const bucketUrl = "https://udeyou.s3.sa-east-1.amazonaws.com/";   
+    const admin = window.sessionStorage.getItem('isAdmin');
 
     const handlePlus = () => {
         navigate('/plus');
@@ -29,18 +20,15 @@ function Vehicle() {
             deleteVehicle(id);
         }
     }
-
     
     const handleEdit = (id) => {
         vehicleIdEmitter(id);
         navigate('/edit');
     }
-    
-    if (catalog.length === 0) return <img src={spinner} style={{width: '50px'}} />;
 
     return (
         <div className="catalog">
-            {catalog.sort(function compare(a, b) {if (a.price < b.price) return -1; if (a.price > b.price) return 1; return 0}).map((vehicle) => (
+            {vehicles.sort(function compare(a, b) {if (a.price < b.price) return -1; if (a.price > b.price) return 1; return 0}).map((vehicle) => (
                 <div className="card">
                     <div className="img">
                         <img src={bucketUrl + vehicle.imagePath}  alt="" />
@@ -55,7 +43,7 @@ function Vehicle() {
                                 <div className="model" style={{color: 'white'}}>{vehicle.model}</div>
                                 <div className="brand" style={{color: 'white'}}>{vehicle.brand}</div>
                             </div>
-                            {isAdmin === 'true' && (
+                            {admin === 'true' && (
                                 <div className="icon-block">
                                     <FaPlus className="icon" onClick={handlePlus} />
                                     <FaTrash className="icon" onClick={() => {handleTrash(vehicle.id)}} />

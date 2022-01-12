@@ -1,6 +1,5 @@
 import { createContext, useState, useEffect } from 'react';
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
 
 const VehicleContext = createContext();
 
@@ -16,15 +15,15 @@ export const VehicleProvider = ( {children} ) => {
         let token = window.sessionStorage.getItem('token');
 
         const response = await fetch('http://localhost:8080/vehicles/find/all', {
-            headers: {
+            method: 'GET',
+            headers: { 
+                'Authorization': 'Bearer ' + token,
                 'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + token
-            },
+                'Content-Type': 'application/json'
+            }
         });
         const data = await response.json();
         setVehicles(data);
-        return data;
     }
 
     const uploadFile = async (formData) => {

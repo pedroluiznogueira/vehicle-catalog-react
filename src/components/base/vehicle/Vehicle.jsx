@@ -1,29 +1,29 @@
-import './Vehicle.css';
 import VehicleContext from '../../context/vehicle/VehicleContext';
 import { useContext, useState, useEffect } from 'react';
 import { FaTrash, FaPlus, FaEdit } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import spinner from '../../shared/assets/spinner.gif';
+import './Vehicle.css';
 
 function Vehicle() {
+    const {vehicles, vehicleIdEmitter, deleteVehicle, formGoalEmitter} = useContext(VehicleContext);
     const navigate = useNavigate();
-    const { vehicles, vehicleIdEmitter, deleteVehicle } = useContext(VehicleContext);
+    
     const bucketUrl = "https://udeyou.s3.sa-east-1.amazonaws.com/";   
     const admin = window.sessionStorage.getItem('isAdmin');
 
     const handlePlus = () => {
-        navigate('/plus');
-    }
-
-    const handleTrash = (id) => {
-        if (window.confirm('Are you sure you want to delete it ?')) {
-            deleteVehicle(id);
-        }
+        formGoalEmitter('plus');
+        navigate('/form');
     }
     
     const handleEdit = (id) => {
         vehicleIdEmitter(id);
-        navigate('/edit');
+        formGoalEmitter('edit');
+        navigate('/form');
+    }
+    
+    const handleTrash = (id) => {
+        if (window.confirm('Are you sure you want to delete it ?')) deleteVehicle(id);
     }
 
     return (

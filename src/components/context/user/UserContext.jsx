@@ -5,7 +5,6 @@ const UserContext = createContext();
 export const UserProvider = ( {children} ) => {
 
     const register = async (user) => {
-        console.log(user);
         const response = await fetch('http://localhost:8080/users/register', {
             method: 'POST',
             headers: {
@@ -15,12 +14,10 @@ export const UserProvider = ( {children} ) => {
             body: JSON.stringify(user)
         });
         const data = await response.json();
-        console.log(data);
         return data;
     }
 
     const authenticate = async (user) => {
-        console.log(user);
         const response = await fetch('http://localhost:8080/users/auth', {
             method: 'POST',
             headers: {
@@ -30,7 +27,6 @@ export const UserProvider = ( {children} ) => {
             body: JSON.stringify(user)
         });
         const data = await response.json();
-        console.log(data);
         return data;
     }
 

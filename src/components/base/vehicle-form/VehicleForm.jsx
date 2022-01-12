@@ -1,7 +1,9 @@
-import AdminNavbar from "../../shared/adminavbar/AdminNavbar";
+import AdminNavbar from './../../shared/adminavbar/AdminNavbar';
 import { useState, useContext } from 'react';
-import './Plus.css';
-import VehicleContext from "../../context/vehicle/VehicleContext";
+import VehicleContext from '../../context/vehicle/VehicleContext';
+import spinner from '../../shared/assets/spinner.gif';
+import { useNavigate } from 'react-router-dom';
+import './VehicleForm.css';
 
 const vehicle = {
     name: '',
@@ -11,17 +13,21 @@ const vehicle = {
     price: null
 }
 
-function Plus() {
+function VehicleForm() {
+    const navigate = useNavigate();
     const [nameText, setNameText] = useState('');
     const [brandText, setBrandText] = useState('');
     const [modelText, setModelText] = useState('');
+    const [priceNumber, setPriceNumber] = useState(null);
     const [selectedFile, setSelectedFile] = useState(null);
-    const {uploadFile, registerVehicle} = useContext(VehicleContext);
+    const [isLoading, setIsLoading] = useState(false);
+    const {uploadFile, updateVehicle, registerVehicle, formGoal} = useContext(VehicleContext);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const formData = new FormData();
+        setIsLoading(true);
 
+        const formData = new FormData();
         formData.append(
             "file",
             selectedFile,
@@ -29,17 +35,38 @@ function Plus() {
         );
 
         uploadFile(formData);
-
-        vehicle.name = nameText;
-        vehicle.brand = brandText;
-        vehicle.model = modelText;
-        vehicle.imagePath = selectedFile.name;
-
-        registerVehicle(vehicle);
+        handleVehicle(formGoal);
     }
 
     const onFileChange = (e) => {
         setSelectedFile(e.target.files[0])
+    }
+
+    const handleVehicle = (goal) => {
+        vehicle.name = nameText;
+        vehicle.brand = brandText;
+        vehicle.model = modelText;
+        vehicle.imagePath = selectedFile.name;
+        vehicle.price = priceNumber;
+
+        if (formGoal === 'plus') {
+            const promise = registerVehicle(vehicle);
+            promise.then(() => {
+                setTimeout(() => {
+                    setIsLoading(false)
+                    navigate('/app');
+                }, 2000);
+            });
+
+        } else {
+            const promise = updateVehicle(vehicle);
+            promise.then(() => {
+                setTimeout(() => {
+                    setIsLoading(false);
+                    navigate('/app');
+                }, 2000);
+            });
+        }
     }
 
     const handleNameChange = (e) => {
@@ -54,12 +81,16 @@ function Plus() {
         setModelText(e.target.value);
     }
 
+    const handlePriceChange = (e) => {
+        setPriceNumber(e.target.value);
+    }
+
     return (
         <>
             <AdminNavbar />
             <div className="container">
                 <form className="plus-form" onSubmit={handleSubmit}>
-                    <h3>Create Vehicle</h3>
+                    <h3>Vehicle {formGoal}</h3>
                     <div className="input-block">
                         <label htmlFor="name">Name</label>
                         <input 
@@ -69,7 +100,6 @@ function Plus() {
                             onChange={handleNameChange}
                         />
                     </div>
-
                     <div className="input-block">
                         <label htmlFor="brand">Brand</label>
                         <input 
@@ -79,7 +109,6 @@ function Plus() {
                             onChange={handleBrandChange}
                         />
                     </div>
-
                     <div className="input-block">
                         <label htmlFor="model">Model</label>
                         <input 
@@ -89,14 +118,28 @@ function Plus() {
                             onChange={handleModelChange}
                         />    
                     </div>
-
+                    <div className="input-block">
+                        <label htmlFor="model">Price</label>
+                        <input 
+                            id="model" 
+                            type="number" 
+                            value={priceNumber}
+                            onChange={handlePriceChange}
+                        />    
+                    </div>
                     <div className="input-block">
                         <label id="image-label" htmlFor="image">Upload Image</label>
                         <input onChange={onFileChange} id="image" type="file" />    
                     </div>
-
-                    <div className="input-block">
-                        <button type="submit" className="btn">Submit</button>
+                    <div id="feedback" className="input-block">
+                    {
+                    isLoading ?
+                    <img
+                        src={spinner}
+                        style={{width: '50px'}}
+                    /> : 
+                    <button className="btn" type="submit">Send</button>
+                    }
                     </div>
                 </form>
             </div>
@@ -104,4 +147,4 @@ function Plus() {
     )
 }
 
-export default Plus;
+export default VehicleForm;

@@ -7,7 +7,8 @@ import './Register.css';
 const user = {
     name: '',
     email: '',
-    password: ''
+    password: '',
+    isAdmin: false
 }
 
 function Register() {
@@ -18,7 +19,6 @@ function Register() {
     const [isLoading, setIsLoading] = useState(false);
     const { register } = useContext(UserContext);
 
-    // setTimeout used only to simulate server response
     const handleSubmit = (e) => {
         e.preventDefault();
         user.name = nameText;
@@ -35,11 +35,6 @@ function Register() {
                         navigate('/login', { replace: true });
                     }, 2000)
                 }
-            )
-            .catch(
-                setTimeout(() => {
-                    setIsLoading(false);
-                }, 2000)
             );
         setNameText('');
         setEmailText('');
@@ -62,9 +57,9 @@ function Register() {
     return(
         <div className="container">
             <form className="register-form" onSubmit={handleSubmit}>
-                <h1>Cadastro</h1>
+                <h1>Sign Up</h1>
                 <div className="form-group">
-                    <label htmlFor="exampleInputNome">Nome</label>
+                    <label htmlFor="exampleInputNome">Name</label>
                     <input
                         onChange={handleNameChange}
                         type="text" 
@@ -90,7 +85,7 @@ function Register() {
                 />
                 </div>
                 <div className="form-group">
-                <label htmlFor="exampleInputPassword1">Senha</label>
+                <label htmlFor="exampleInputPassword1">Password</label>
                 <input
                     onChange={handlePasswordChange}
                     type="password" 
@@ -104,7 +99,7 @@ function Register() {
                 <div className="form-group-question">
                     <small>
                         <NavLink className="question-text" to='/login' style={{ textDecoration: 'none' }}>
-                            Já tem uma conta ?
+                            Already have an account ?
                         </NavLink>
                     </small>
                 </div>
@@ -114,7 +109,7 @@ function Register() {
                         src={spinner}
                         style={{width: '50px'}}
                     /> : 
-                    <button className="btn" type="submit">Criar conta</button>
+                    <button className="btn" type="submit">Register</button>
                 }
             </form>
         </div>

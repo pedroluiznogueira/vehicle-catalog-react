@@ -7,9 +7,9 @@ import { useNavigate } from 'react-router-dom';
 
 function Vehicle() {
     const navigate = useNavigate();
-    const [catalog, setCatalog] = useState([]);
     const [isAdmin, setIsAdmin] = useState('');
-    const {vehicles, fetchVehicles, vehicleIdEmitter} = useContext(VehicleContext);
+    const [catalog, setCatalog] = useState([]);
+    const {vehicles, fetchVehicles, vehicleIdEmitter, deleteVehicle} = useContext(VehicleContext);
 
     const bucketUrl = "https://udeyou.s3.sa-east-1.amazonaws.com/"
     
@@ -23,9 +23,9 @@ function Vehicle() {
         navigate('/plus');
     }
 
-    const handleTrash = () => {
+    const handleTrash = (id) => {
         if (window.confirm('Are you sure you want to delete it ?')) {
-            navigate('/trash');
+            deleteVehicle(id);
         }
     }
 
@@ -54,7 +54,7 @@ function Vehicle() {
                             {isAdmin === 'true' && (
                                 <div className="icon-block">
                                     <FaPlus className="icon" onClick={handlePlus} />
-                                    <FaTrash className="icon" onClick={handleTrash} />
+                                    <FaTrash className="icon" onClick={() => {handleTrash(vehicle.id)}} />
                                     <FaEdit className="icon" onClick={() => {handleEdit(vehicle.id)}} />
                                 </div>
                             )}

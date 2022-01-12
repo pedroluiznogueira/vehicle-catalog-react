@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from 'react';
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 const VehicleContext = createContext();
 
@@ -22,7 +23,6 @@ export const VehicleProvider = ( {children} ) => {
             },
         });
         const data = await response.json();
-        console.log(data);
         setVehicles(data);
         return data;
     }
@@ -74,13 +74,29 @@ export const VehicleProvider = ( {children} ) => {
         return data;
     }
 
+    const deleteVehicle = async (vehicleId) => {
+        let token = window.sessionStorage.getItem('token');
+        const userId = window.sessionStorage.getItem('logged');
+
+        const response = await fetch(`http://localhost:8080/vehicles/delete/${vehicleId}/user/${userId}`, {
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            }
+        });
+        setVehicles(vehicles.filter((vehicle) => vehicle.id !== vehicleId));
+    }
+
     return(
         <VehicleContext.Provider value={{
             vehicles: vehicles,
             uploadFile: uploadFile,
             registerVehicle: registerVehicle,
             vehicleIdEmitter: vehicleIdEmitter,
-            updateVehicle: updateVehicle
+            updateVehicle: updateVehicle,
+            deleteVehicle: deleteVehicle
         }}>
             {children}
         </VehicleContext.Provider>

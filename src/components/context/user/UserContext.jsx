@@ -4,8 +4,10 @@ const UserContext = createContext();
 
 export const UserProvider = ( {children} ) => {
 
+    const url = 'https://vehicle-catalog-api.herokuapp.com';
+
     const register = async (user) => {
-        const response = await fetch('http://localhost:8080/users/register', {
+        const response = await fetch(`${url}/users/register`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -18,7 +20,7 @@ export const UserProvider = ( {children} ) => {
     }
 
     const authenticate = async (user) => {
-        const response = await fetch('http://localhost:8080/users/auth', {
+        const response = await fetch('${url}/users/auth', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

@@ -7,13 +7,15 @@ const vehicle = {
     name: '',
     brand: '',
     model: '',
-    imagePath: ''
+    imagePath: '',
+    price: null
 }
 
 function VehicleForm() {
     const [nameText, setNameText] = useState('');
     const [brandText, setBrandText] = useState('');
     const [modelText, setModelText] = useState('');
+    const [priceNumber, setPriceNumber] = useState(null);
     const [selectedFile, setSelectedFile] = useState(null);
     const {uploadFile, updateVehicle, registerVehicle, formGoal} = useContext(VehicleContext);
 
@@ -33,6 +35,7 @@ function VehicleForm() {
         vehicle.brand = brandText;
         vehicle.model = modelText;
         vehicle.imagePath = selectedFile.name;
+        vehicle.price = priceNumber;
 
         if (formGoal === 'plus') registerVehicle(vehicle);
         if (formGoal === 'edit') updateVehicle(vehicle);
@@ -53,6 +56,10 @@ function VehicleForm() {
 
     const handleModelChange = (e) => {
         setModelText(e.target.value);
+    }
+
+    const handlePriceChange = (e) => {
+        setPriceNumber(e.target.value);
     }
 
     return (
@@ -86,6 +93,15 @@ function VehicleForm() {
                             type="text" 
                             value={modelText}
                             onChange={handleModelChange}
+                        />    
+                    </div>
+                    <div className="input-block">
+                        <label htmlFor="model">Price</label>
+                        <input 
+                            id="model" 
+                            type="number" 
+                            value={priceNumber}
+                            onChange={handlePriceChange}
                         />    
                     </div>
                     <div className="input-block">

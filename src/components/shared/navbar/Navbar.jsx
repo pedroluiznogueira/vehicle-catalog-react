@@ -16,7 +16,7 @@ function Navbar() {
                 <h1 className="logo">Vehicle Catalog</h1>
             </div>
             <div className="logout-block">
-                <h1 onClick={handleLogout} className="logout">Sair</h1>
+                <h1 onClick={handleLogout} className="logout">Logout</h1>
             </div>
         </nav>
     );

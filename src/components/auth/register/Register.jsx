@@ -7,7 +7,8 @@ import './Register.css';
 const user = {
     name: '',
     email: '',
-    password: ''
+    password: '',
+    isAdmin: false
 }
 
 function Register() {

@@ -18,7 +18,6 @@ function Login() {
     const { authenticate } = useContext(UserContext);
     const { vehicles } = useContext(VehicleContext);
     
-    // setTimeout used only to simulate server response
     const handleSubmit = (e) => {
         e.preventDefault();
         user.email = emailText;
@@ -60,7 +59,7 @@ function Login() {
     return(
         <div className="container">
             <form className="form" onSubmit={handleSubmit}>
-                <h1>Login</h1>
+                <h1>Sign In</h1>
                 <div className="form-group">
                     <label htmlFor="exampleInputEmail1">E-mail</label>
                     <input
@@ -75,7 +74,7 @@ function Login() {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="exampleInputPassword1">Senha</label>
+                    <label htmlFor="exampleInputPassword1">Password</label>
                     <input
                         onChange={handlePasswordChange}
                         type="password" 
@@ -89,7 +88,7 @@ function Login() {
                 <div className="form-group-question">
                     <small>
                         <NavLink className="question-text" to='/register' style={{ textDecoration: 'none' }}>
-                            Ainda não tem uma conta ?
+                            Don't you have an account ?
                         </NavLink>
                     </small>
                 </div>
@@ -99,7 +98,7 @@ function Login() {
                         src={spinner}
                         style={{width: '50px'}}
                     /> : 
-                    <button className="btn" type="submit">Entrar</button>
+                    <button className="btn" type="submit">Login</button>
                 }
             </form>
         </div>

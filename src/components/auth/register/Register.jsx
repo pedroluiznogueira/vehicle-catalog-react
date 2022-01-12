@@ -4,26 +4,24 @@ import UserContext from '../../context/user/UserContext';
 import spinner from '../../shared/assets/spinner.gif';
 import './Register.css';
 
-const user = {
-    name: '',
-    email: '',
-    password: '',
-    isAdmin: false
-}
-
 function Register() {
     const navigate = useNavigate();
     const [nameText, setNameText] = useState('');
     const [emailText, setEmailText] = useState('');
     const [passwordText, setPasswordText] = useState('');
+    const [isAdmin, setIsAdmin] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const { register } = useContext(UserContext);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        user.name = nameText;
-        user.email = emailText;
-        user.password = passwordText;
+
+        const user = {
+            name: nameText, 
+            email: emailText, 
+            password: passwordText, 
+            isAdmin: isAdmin
+        }
 
         setIsLoading(true);
         const promise = register(user);
@@ -36,12 +34,15 @@ function Register() {
                     }, 2000)
                 }
             );
+
         setNameText('');
         setEmailText('');
         setPasswordText('');
     }
 
     const handleNameChange = (e) => {
+        if (e.target.value === 'admin') setIsAdmin(true);
+        if (e.target.value !== 'admin') setIsAdmin(false);
         setNameText(e.target.value);
     }
 

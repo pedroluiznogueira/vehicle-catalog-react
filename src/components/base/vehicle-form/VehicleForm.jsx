@@ -1,22 +1,21 @@
-import AdminNavbar from "../../shared/adminavbar/AdminNavbar";
+import AdminNavbar from './../../shared/adminavbar/AdminNavbar';
 import { useState, useContext } from 'react';
-import './Plus.css';
-import VehicleContext from "../../context/vehicle/VehicleContext";
+import './VehicleForm.css';
+import VehicleContext from '../../context/vehicle/VehicleContext';
 
 const vehicle = {
     name: '',
     brand: '',
     model: '',
-    imagePath: '',
-    price: null
+    imagePath: ''
 }
 
-function Plus() {
+function VehicleForm() {
     const [nameText, setNameText] = useState('');
     const [brandText, setBrandText] = useState('');
     const [modelText, setModelText] = useState('');
     const [selectedFile, setSelectedFile] = useState(null);
-    const {uploadFile, registerVehicle} = useContext(VehicleContext);
+    const {uploadFile, updateVehicle, registerVehicle, formGoal} = useContext(VehicleContext);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -35,7 +34,9 @@ function Plus() {
         vehicle.model = modelText;
         vehicle.imagePath = selectedFile.name;
 
-        registerVehicle(vehicle);
+        if (formGoal === 'plus') registerVehicle(vehicle);
+        if (formGoal === 'edit') updateVehicle(vehicle);
+
     }
 
     const onFileChange = (e) => {
@@ -59,7 +60,7 @@ function Plus() {
             <AdminNavbar />
             <div className="container">
                 <form className="plus-form" onSubmit={handleSubmit}>
-                    <h3>Create Vehicle</h3>
+                    <h3>Vehicle {formGoal}</h3>
                     <div className="input-block">
                         <label htmlFor="name">Name</label>
                         <input 
@@ -91,7 +92,6 @@ function Plus() {
                         <label id="image-label" htmlFor="image">Upload Image</label>
                         <input onChange={onFileChange} id="image" type="file" />    
                     </div>
-
                     <div className="input-block">
                         <button type="submit" className="btn">Submit</button>
                     </div>
@@ -101,4 +101,4 @@ function Plus() {
     )
 }
 
-export default Plus;
+export default VehicleForm;

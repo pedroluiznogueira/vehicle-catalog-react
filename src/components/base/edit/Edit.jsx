@@ -68,7 +68,6 @@ function Edit() {
                             onChange={handleNameChange}
                         />
                     </div>
-
                     <div className="input-block">
                         <label htmlFor="brand">Brand</label>
                         <input 
@@ -78,7 +77,6 @@ function Edit() {
                             onChange={handleBrandChange}
                         />
                     </div>
-
                     <div className="input-block">
                         <label htmlFor="model">Model</label>
                         <input 
@@ -88,12 +86,10 @@ function Edit() {
                             onChange={handleModelChange}
                         />    
                     </div>
-
                     <div className="input-block">
                         <label id="image-label" htmlFor="image">Upload Image</label>
                         <input onChange={onFileChange} id="image" type="file" />    
                     </div>
-
                     <div className="input-block">
                         <button type="submit" className="btn">Submit</button>
                     </div>

@@ -6,6 +6,7 @@ const VehicleContext = createContext();
 export const VehicleProvider = ( {children} ) => {
     const [vehicles, setVehicles] = useState([]);
     const [vehicleId, setVehicleId] = useState(null);
+    const [formGoal, setFormGoal] = useState(''); 
 
     useEffect(() => {
         fetchVehicles();
@@ -29,6 +30,11 @@ export const VehicleProvider = ( {children} ) => {
     const uploadFile = async (formData) => {
         const response = await axios.post("http://localhost:8080/upload-file", formData);
         const data = response.json();
+    }
+
+    const formGoalEmitter = (goal) => {
+        console.log(goal);
+        setFormGoal(goal);
     }
 
     const registerVehicle = async (vehicle) => {
@@ -91,11 +97,13 @@ export const VehicleProvider = ( {children} ) => {
     return(
         <VehicleContext.Provider value={{
             vehicles: vehicles,
+            formGoal: formGoal,
+            vehicleIdEmitter: vehicleIdEmitter,
+            formGoalEmitter: formGoalEmitter,
             uploadFile: uploadFile,
             registerVehicle: registerVehicle,
-            vehicleIdEmitter: vehicleIdEmitter,
             updateVehicle: updateVehicle,
-            deleteVehicle: deleteVehicle
+            deleteVehicle: deleteVehicle,
         }}>
             {children}
         </VehicleContext.Provider>

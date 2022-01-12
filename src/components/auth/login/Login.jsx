@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import UserContext from "../../context/user/UserContext";
 import spinner from '../../shared/assets/spinner.gif';
 import VehicleContext from "../../context/vehicle/VehicleContext";
@@ -16,7 +16,6 @@ function Login() {
     const [passwordText, setPasswordText] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const { authenticate } = useContext(UserContext);
-    const { vehicles } = useContext(VehicleContext);
     
     const handleSubmit = (e) => {
         e.preventDefault();

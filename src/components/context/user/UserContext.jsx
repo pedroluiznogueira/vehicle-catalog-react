@@ -3,11 +3,9 @@ import { createContext, useState, useEffect } from 'react';
 const UserContext = createContext();
 
 export const UserProvider = ( {children} ) => {
-
-    const url = 'https://vehicle-catalog-api.herokuapp.com';
-
+    
     const register = async (user) => {
-        const response = await fetch(`${url}/users/register`, {
+        const response = await fetch(`/users/register`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -20,7 +18,7 @@ export const UserProvider = ( {children} ) => {
     }
 
     const authenticate = async (user) => {
-        const response = await fetch(`${url}/users/auth`, {
+        const response = await fetch(`/users/auth`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

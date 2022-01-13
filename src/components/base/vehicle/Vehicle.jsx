@@ -36,7 +36,7 @@ function Vehicle() {
                     <div className="vehicle-info">
                         <div className="upper-block">
                             <h2 className="name" style={{color: 'white'}}>{vehicle.name}</h2>
-                            <h2 className="price" style={{color: 'green'}}>{vehicle.price}</h2>
+                            <h2 className="price" style={{color: 'green'}}>$ {vehicle.price}</h2>
                         </div>
                         <div className="bottom-block">
                             <div className="text-block">

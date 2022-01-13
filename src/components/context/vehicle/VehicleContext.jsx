@@ -10,7 +10,7 @@ export const VehicleProvider = ( {children} ) => {
 
     const token = window.sessionStorage.getItem('token');
     const userId = window.sessionStorage.getItem('logged');
-    const url = 'https://vehicle-catalog-api.herokuapp.com';
+    const url = 'http://localhost:8080';
 
     useEffect(() => {
         fetchVehicles();

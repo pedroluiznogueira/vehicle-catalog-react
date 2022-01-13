@@ -3,11 +3,21 @@
 <hr>
 <h2>Sumário desta Documentação</h2>
 <ul>
+  <li><a href="#pipeline">Pipeline</a></li>
   <li><a href="#rodando">Rodando o projeto na sua máquina</a></li>
   <li><a href="#cons">API consumida</a></li>
   <li><a href="#proxy">Proxy do projeto</a></li>
   <li><a href="#contr">Como contribuir</a></li>
 </ul>
+<hr>
+
+<div id="pipeline"><div>
+  
+## Pipeline
+
+- Caso queira acessar a branch de produção do projeto, acesse a branch <a href="https://github.com/pedroluiznogueira/vehicle-catalog-react/tree/master">master</a>
+- Ela está configurada com o pipeline para fazer deploy contínuo
+- A branch utilizada em desenvolvimento contínuo é a branch <a href="https://github.com/pedroluiznogueira/vehicle-catalog-react/tree/developer">developer</a> 
 <hr>
 
 <div id="rodando"><div>

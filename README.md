@@ -1,4 +1,4 @@
-# Vehicle Catalog React App
+# Kardbank React App
 
 <hr>
 <h2>Sumário desta Documentação</h2>
@@ -15,16 +15,16 @@
   
 ## Pipeline
 
-- Caso queira acessar a branch de produção do projeto, acesse a branch <a href="https://github.com/pedroluiznogueira/vehicle-catalog-react/tree/master">master</a>
-- Ela está configurada com o pipeline para fazer deploy contínuo
-- A branch utilizada em desenvolvimento contínuo é a branch <a href="https://github.com/pedroluiznogueira/vehicle-catalog-react/tree/developer">developer</a> 
+<div style="display:flex; justify-content:center; align-items:center;">
+    <img src="https://udeyou.s3.sa-east-1.amazonaws.com/pipeline.png">
+</div>
 <hr>
 
 <div id="rodando"><div>
    
 ## Como rodar este projeto na sua máquina local
 
-1. git clone https://github.com/pedroluiznogueira/vehicle-catalog-react.git
+1. git clone https://github.com/pedroluiznogueira/kardbank-react.git
 2. Abra o projeto clonado em sua IDE/Editor de texto de preferência
 3. Abra a pasta do projeto no terminal
 4. Digite <b>npm install</b> e aperte enter
@@ -44,7 +44,7 @@
    
 ## Proxy do projeto
 
--> Este projeto está configurado para consumir a <a href="https://github.com/pedroluiznogueira/vehicle-catalog-java">API</a> rodando em <b>http://localhost:8080</b><br>
+-> Este projeto está configurado para consumir a <a href="https://github.com/pedroluiznogueira/kardbank-java">API</a> rodando em <b>http://localhost:8080</b><br>
 <hr>
    
 <div id="contr"><div>

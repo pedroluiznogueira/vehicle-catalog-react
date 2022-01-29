@@ -4,10 +4,10 @@ const UserContext = createContext();
 
 export const UserProvider = ( {children} ) => {
 
-    const url = 'http://localhost:8080';
+    const apiUrl = process.env.REACT_APP_API_URL;
 
     const register = async (user) => {
-        const response = await fetch(`${url}/users/register`, {
+        const response = await fetch(`${apiUrl}/users/register`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -20,7 +20,7 @@ export const UserProvider = ( {children} ) => {
     }
 
     const authenticate = async (user) => {
-        const response = await fetch(`${url}/users/auth`, {
+        const response = await fetch(`${apiUrl}/users/auth`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

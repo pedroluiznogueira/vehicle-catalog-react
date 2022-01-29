@@ -3,6 +3,7 @@
 <hr>
 <h2>Sumário desta Documentação</h2>
 <ul>
+  <li><a href="#pipeline">Pipeline</a></li>
   <li><a href="#rodando">Rodando o projeto na sua máquina</a></li>
   <li><a href="#cons">API consumida</a></li>
   <li><a href="#proxy">Proxy do projeto</a></li>
@@ -35,6 +36,7 @@
 ## Proxy do projeto
 
 -> Este projeto está configurado para consumir a <a href="https://github.com/pedroluiznogueira/sps-node">API</a> rodando em <b>http://localhost:8080</b><br>
+
 <hr>
    
 <div id="contr"><div>

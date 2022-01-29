@@ -4,7 +4,7 @@ const UserContext = createContext();
 
 export const UserProvider = ( {children} ) => {
 
-    const url = 'https://vehicle-catalog-api.herokuapp.com';
+    const url = 'http://localhost:8080';
 
     const register = async (user) => {
         const response = await fetch(`${url}/users/register`, {

@@ -4,11 +4,10 @@ const UserContext = createContext();
 
 export const UserProvider = ( {children} ) => {
 
-    const productionUrl = process.env.REACT_APP_PRODUCTION;
-    const developmentUrl = process.env.REACT_APP_DEVELOPMENT;
+    const apiUrl = process.env.REACT_APP_API_URL;
 
     const register = async (user) => {
-        const response = await fetch(`${developmentUrl}/users/register`, {
+        const response = await fetch(`${apiUrl}/users/register`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -21,7 +20,7 @@ export const UserProvider = ( {children} ) => {
     }
 
     const authenticate = async (user) => {
-        const response = await fetch(`${developmentUrl}/users/auth`, {
+        const response = await fetch(`${apiUrl}/users/auth`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

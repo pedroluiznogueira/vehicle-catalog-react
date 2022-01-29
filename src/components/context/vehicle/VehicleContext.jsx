@@ -10,14 +10,14 @@ export const VehicleProvider = ( {children} ) => {
 
     const token = window.sessionStorage.getItem('token');
     const userId = window.sessionStorage.getItem('logged');
-    const url = 'http://localhost:8080';
+    const apiUrl = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
         fetchVehicles();
     }, []);
 
     const fetchVehicles = async () => {
-        const response = await fetch(`${url}/vehicles/find/all`, {
+        const response = await fetch(`${apiUrl}/vehicles/find/all`, {
             method: 'GET',
             headers: { 
                 'Authorization': 'Bearer ' + token,
@@ -30,7 +30,7 @@ export const VehicleProvider = ( {children} ) => {
     }
 
     const uploadFile = async (formData) => {
-        const response = await axios.post(`${url}/upload-file`, formData, {
+        const response = await axios.post(`${apiUrl}/upload-file`, formData, {
             headers: {'Authorization': 'Bearer ' + token}
         });
     }
@@ -40,7 +40,7 @@ export const VehicleProvider = ( {children} ) => {
     }
 
     const registerVehicle = async (vehicle) => { 
-        const response = await fetch(`${url}/vehicles/register/${userId}`, {
+        const response = await fetch(`${apiUrl}/vehicles/register/${userId}`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -59,7 +59,7 @@ export const VehicleProvider = ( {children} ) => {
     }
 
     const updateVehicle = async (vehicle) => {
-        const response = await fetch(`${url}/vehicles/update/${vehicleId}/user/${userId}`, {
+        const response = await fetch(`${apiUrl}/vehicles/update/${vehicleId}/user/${userId}`, {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',
@@ -76,7 +76,7 @@ export const VehicleProvider = ( {children} ) => {
     }
 
     const deleteVehicle = async (vehicleId) => {
-        const response = await fetch(`${url}/vehicles/delete/${vehicleId}/user/${userId}`, {
+        const response = await fetch(`${apiUrl}/vehicles/delete/${vehicleId}/user/${userId}`, {
             method: 'DELETE',
             headers: {
                 'Accept': 'application/json',

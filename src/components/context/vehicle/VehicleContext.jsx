@@ -13,6 +13,7 @@ export const VehicleProvider = ( {children} ) => {
     const apiUrl = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
+        console.log(apiUrl);
         fetchVehicles();
     }, []);
 

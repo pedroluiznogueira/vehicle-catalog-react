@@ -31,6 +31,7 @@ function Login() {
                         setIsLoading(false);
                         window.sessionStorage.setItem('token', data.token);
                         window.sessionStorage.setItem('logged', JSON.stringify(data.userId));
+                        window.sessionStorage.setItem('isAdmin', JSON.stringify(data.isAdmin));
                         navigate('/app', { replace: true });
                     }, 2000)
                 }

@@ -7,7 +7,6 @@ export const VehicleProvider = ( {children} ) => {
     const [vehicles, setVehicles] = useState([]);
     const [vehicleId, setVehicleId] = useState(null);
     const [formGoal, setFormGoal] = useState('');
-    const [isAdmin, setIsAdmin] = useState(false);
 
     const token = window.sessionStorage.getItem('token');
     const userId = window.sessionStorage.getItem('logged');
@@ -89,25 +88,6 @@ export const VehicleProvider = ( {children} ) => {
         setVehicles(vehicles.filter((vehicle) => vehicle.id !== vehicleId));
     }
 
-    const findById = async (id) => {
-        const response = await fetch(`${apiUrl}/users/find/by/id/${id}`, {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + token
-            }
-        });
-        const data = response.json();
-        data.then((data) => {
-            if (data.isAdmin) setIsAdmin(true);
-            console.log(data);
-        }).catch(() => {
-            console.log('error')
-        })
-        return data;
-    }
-
     return(
         <VehicleContext.Provider value={{
             vehicles: vehicles,
@@ -118,8 +98,6 @@ export const VehicleProvider = ( {children} ) => {
             registerVehicle: registerVehicle,
             updateVehicle: updateVehicle,
             deleteVehicle: deleteVehicle,
-            findById: findById,
-            isAdmin: isAdmin
         }}>
             {children}
         </VehicleContext.Provider>

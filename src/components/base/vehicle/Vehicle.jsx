@@ -5,11 +5,14 @@ import { useNavigate } from 'react-router-dom';
 import './Vehicle.css';
 
 function Vehicle() {
-    const {vehicles, vehicleIdEmitter, deleteVehicle, formGoalEmitter} = useContext(VehicleContext);
+    const {vehicles, vehicleIdEmitter, deleteVehicle, formGoalEmitter, findById, isAdmin} = useContext(VehicleContext);
     const navigate = useNavigate();
     
-    const bucketUrl = "https://udeyou.s3.sa-east-1.amazonaws.com/";   
-    const admin = window.sessionStorage.getItem('isAdmin');
+    const bucketUrl = "https://udeyou.s3.sa-east-1.amazonaws.com/";
+
+    useEffect(() => {
+        findById(window.sessionStorage.getItem('logged'));
+    }, []);
 
     const handlePlus = () => {
         formGoalEmitter('plus');
@@ -43,7 +46,7 @@ function Vehicle() {
                                 <div className="model" style={{color: 'white'}}>{vehicle.model}</div>
                                 <div className="brand" style={{color: 'white'}}>{vehicle.brand}</div>
                             </div>
-                            {admin === 'true' && (
+                            {isAdmin === true && (
                                 <div className="icon-block">
                                     <FaPlus className="icon" onClick={handlePlus} />
                                     <FaTrash className="icon" onClick={() => {handleTrash(vehicle.id)}} />

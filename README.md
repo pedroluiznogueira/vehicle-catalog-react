@@ -6,7 +6,7 @@
   <li><a href="#pipeline">Pipeline</a></li>
   <li><a href="#rodando">Rodando o projeto na sua máquina</a></li>
   <li><a href="#cons">API consumida</a></li>
-  <li><a href="#proxy">Configurando url da API</a></li>
+  <li><a href="#proxy">Proxy do projeto</a></li>
   <li><a href="#contr">Como contribuir</a></li>
 </ul>
 <hr>
@@ -33,9 +33,9 @@
    
 <div id="proxy"><div>
    
-## Configurando url da API
+## Proxy do projeto
 
--> Crie um arquivo <b>.env</b> com "REACT_APP_API_URL=http://localhost:8080" dentro
+-> Este projeto está configurado para consumir a <a href="https://github.com/pedroluiznogueira/sps-node">API</a> rodando em <b>http://localhost:8080</b><br>
 
 <hr>
    
